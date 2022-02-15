@@ -38,7 +38,7 @@ body {
 
 .call_to-btn img {
   width: 18px;
-  margin-left: 10px;
+ 
 }
 
 .btn_on-hover {
@@ -173,13 +173,13 @@ a:focus {
 
 /* hero section */
 .hero-container {
-  display: flex;
+  display: center;
   padding-top: 90px;
   padding-bottom: 150px;
 }
 
 .hero_detail-box {
-  width: 40%;
+  width: 100%;
 }
 
 .hero_img-container {
@@ -200,13 +200,13 @@ a:focus {
   font-size: 50px;
   color: #fefeff;
   font-weight: 600;
-  width: 70%;
+  width: 100%;
 }
 
 
 .hero_detail-box p {
   margin-top: 20px;
-  margin-bottom: 35px;
+  margin-bottom: 20px;
 }
 
 
@@ -245,7 +245,7 @@ a:focus {
 }
 
 .about_section a {
-  background-color: #6ebca8;
+  background-color: rgb(36, 0, 83);
   color: #fefeff;
 }
 
@@ -255,7 +255,7 @@ a:focus {
 
 
 .admission_section a {
-  background-color: #1dfdd8;
+  background-color: rgb(36, 0, 83);
   color: #fefeff;
 }
 
@@ -268,7 +268,7 @@ a:focus {
 }
 
 .why_section a {
-  background-color: #6ebca8;
+  background-color: rgb(36, 0, 83);
   color: #fefeff;
 }
 
@@ -278,7 +278,7 @@ a:focus {
 
 
 .determine_section a {
-  background-color: #1dfdd8;
+  background-color: rgb(36, 0, 83);
   color: #fefeff;
 }
 
@@ -299,7 +299,7 @@ a:focus {
 
 .client_section h5 {
   font-size: 24px;
-  color: #1dfdd8;
+  color: rgb(36, 0, 83);
 }
 
 .client_section .row {
@@ -404,15 +404,15 @@ a:focus {
   border: none;
   outline: none;
   border-bottom: 1px solid #000;
-  width: 90%;
-  margin: 15px 0;
+  width: 80%;
+  margin: 15px 15px;
 }
 
 
 
 .contact_form-container button {
   border: none;
-  background-color: #6bd1bd;
+  background-color: rgb(95, 0, 158);
   color: #fff;
   font-size: 15px;
   padding: 15px 45px;
@@ -423,8 +423,8 @@ a:focus {
 
 .contact_img-box {
 
-  display: flex;
-  align-items: center;
+  display: right;
+  align-items: right;
 
 }
 
