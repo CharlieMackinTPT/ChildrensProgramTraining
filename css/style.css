@@ -54,7 +54,7 @@ body {
 }
 
 .main-heading {
-  color: #082465;
+  color: rgb(36, 0, 83);;
   font-weight: bold;
   text-align: center;
 }
@@ -241,7 +241,7 @@ a:focus {
 
 /* about section */
 .about_section {
-  text-align: right;
+  text-align: center;
 }
 
 .about_section a {
