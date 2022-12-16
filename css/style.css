@@ -38,8 +38,46 @@ body {
 
 .call_to-btn img {
   width: 18px;
- 
 }
+
+.cd-faq__category 
+{ background-color: rgb(0, 170, 81);
+  border-color: rgb(0, 120, 58);
+  color: #fefeff;
+}
+
+.cd-faq__categories
+{ background-color: rgb(0, 170, 81);
+  border-color: rgb(0, 120, 58);
+  color: #fefeff;}
+
+.cd-faq__category-selected
+{ background-color: rgb(0, 170, 81);
+  border-color: rgb(0, 120, 58);
+  color: #fefeff;}
+
+  .truncate
+  { background-color: rgb(0, 170, 81);
+    border-color: rgb(0, 120, 58);
+    color: #fefeff;}
+
+  .cd-faq__item-visible .cd-faq__trigger::before
+  { background-color: rgb(0, 170, 81);
+    color: #fefeff;}
+
+    .cd-faq__item-visible .cd-faq__trigger::after
+    { background-color: rgb(0, 170, 81);
+      color: #fefeff;}
+
+      .cd-faq__item .cd-faq__trigger::before
+      { background-color: rgb(0, 170, 81);
+        color: #fefeff;}
+    
+        .cd-faq__item .cd-faq__trigger::after
+        { background-color: rgb(0, 170, 81);
+          color: #fefeff;}
+
+    
 
 .btn_on-hover {
   transition: all 0.3s ease 0s;
@@ -54,7 +92,7 @@ body {
 }
 
 .main-heading {
-  color: rgb(36, 0, 83);;
+  color: rgb(93, 22, 163);
   font-weight: bold;
   text-align: center;
 }
@@ -245,7 +283,7 @@ a:focus {
 }
 
 .about_section a {
-  background-color: rgb(36, 0, 83);
+  background-color: rgb(93, 22, 163);
   color: #fefeff;
 }
 
@@ -255,7 +293,7 @@ a:focus {
 
 
 .admission_section a {
-  background-color: rgb(36, 0, 83);
+  background-color: rgb(93, 22, 163);
   color: #fefeff;
 }
 
@@ -268,7 +306,7 @@ a:focus {
 }
 
 .why_section a {
-  background-color: rgb(36, 0, 83);
+  background-color: rgb(93, 22, 163);
   color: #fefeff;
 }
 
@@ -278,7 +316,7 @@ a:focus {
 
 
 .determine_section a {
-  background-color: rgb(36, 0, 83);
+  background-color: rgb(93, 22, 163);
   color: #fefeff;
 }
 
@@ -299,7 +337,7 @@ a:focus {
 
 .client_section h5 {
   font-size: 24px;
-  color: rgb(36, 0, 83);
+  color: rgb(93, 22, 163);
 }
 
 .client_section .row {
@@ -412,7 +450,7 @@ a:focus {
 
 .contact_form-container button {
   border: none;
-  background-color: rgb(95, 0, 158);
+  background-color: rgb(93, 22, 163);
   color: #fff;
   font-size: 15px;
   padding: 15px 45px;
