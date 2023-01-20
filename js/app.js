@@ -1,3 +1,7 @@
+$(document).ready(function(){
+    console.log(document.title)
+});
+
 function onPDFDownload(domElement)
 {
     console.log(domElement.name);
