@@ -1,5 +1,10 @@
 $(document).ready(function(){
     console.log(document.title)
+    //Telemetry Event
+	var data = {
+		"pageName" : document.title,
+	};
+    googleAnalyticsTelemetry.LogTelemetry("onViewPage", JSON.stringify(data));
 });
 
 function onPDFDownload(domElement)
