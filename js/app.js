@@ -4,7 +4,7 @@ $(document).ready(function(){
 	var data = {
 		"pageName" : document.title,
 	};
-    googleAnalyticsTelemetry.LogPageView("onViewPage", JSON.stringify(data));
+    googleAnalyticsTelemetry.LogPageView("onView", JSON.stringify(data));
 });
 
 function onPDFDownload(domElement)
@@ -23,10 +23,10 @@ function onClickEvent(domElement)
     console.log(domElement.name);
     //Telemetry Event
 	var data = {
-		"elementClicked" : domElement.name
+		"element" : domElement.name
 	};
 
-	googleAnalyticsTelemetry.LogClick("onClickEvent", JSON.stringify(data));
+	googleAnalyticsTelemetry.LogClick("onClick", JSON.stringify(data));
 }
 
 function onFAQViewed(domElement)
