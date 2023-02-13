@@ -4,7 +4,7 @@ $(document).ready(function(){
 	var data = {
 		"pageName" : document.title,
 	};
-    googleAnalyticsTelemetry.LogTelemetry("onViewPage", JSON.stringify(data));
+    googleAnalyticsTelemetry.LogPageView("onViewPage", JSON.stringify(data));
 });
 
 function onPDFDownload(domElement)
@@ -15,19 +15,18 @@ function onPDFDownload(domElement)
 		"pdf" : domElement.name
 	};
 
-	//googleAnalyticsTelemetry.LogTelemetry("onPDFDownload", JSON.stringify(data));
+	googleAnalyticsTelemetry.LogResourceDownload("onPDFDownload", JSON.stringify(data));
 }
 
 function onClickEvent(domElement)
 {
-
     console.log(domElement.name);
     //Telemetry Event
 	var data = {
-		"element" : domElement.name
+		"elementClicked" : domElement.name
 	};
 
-	//googleAnalyticsTelemetry.LogTelemetry("onClickEvent", JSON.stringify(data));
+	googleAnalyticsTelemetry.LogClick("onClickEvent", JSON.stringify(data));
 }
 
 function onFAQViewed(domElement)
