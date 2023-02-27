@@ -1,28 +1,26 @@
 $(document).ready(function(){
     console.log(document.title)
+    //Telemetry Event
+	var data = document.title;
+    googleAnalyticsTelemetry.LogPageView("onView", data);
 });
 
 function onPDFDownload(domElement)
 {
     console.log(domElement.name);
     //Telemetry Event
-	var data = {
-		"pdf" : domElement.name
-	};
+	var data = domElement.name;
 
-	//googleAnalyticsTelemetry.LogTelemetry("onPDFDownload", JSON.stringify(data));
+	googleAnalyticsTelemetry.LogResourceDownload("onPDFDownload", data);
 }
 
 function onClickEvent(domElement)
 {
-
     console.log(domElement.name);
     //Telemetry Event
-	var data = {
-		"element" : domElement.name
-	};
+	var data = domElement.name
 
-	//googleAnalyticsTelemetry.LogTelemetry("onClickEvent", JSON.stringify(data));
+	googleAnalyticsTelemetry.LogClick("onClick", data);
 }
 
 function onFAQViewed(domElement)
