@@ -324,8 +324,11 @@ a:focus {
 }
 
 .why_section a {
+  box-shadow: 10px #3f3f3f;
   background-color: rgb(93, 22, 163);
+  background-position: center;
   color: #fefeff;
+  font-weight: bold;
 }
 
 /* end why section */
