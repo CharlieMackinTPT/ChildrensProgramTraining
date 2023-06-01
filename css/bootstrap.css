@@ -383,7 +383,7 @@ h4, .h4 {
 }
 
 h5, .h5 {
-  font-size: 1.25rem;
+  font-size: 2rem;
 }
 
 h6, .h6 {
@@ -479,6 +479,7 @@ mark,
 .img-fluid {
   max-width: 700px;
 }
+
 
 .img-thumbnail {
   padding: 0.25rem;
