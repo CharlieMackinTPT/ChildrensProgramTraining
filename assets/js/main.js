@@ -1,122 +1,185 @@
-(function(){
-	// FAQ Template - by CodyHouse.co
-  var FaqTemplate = function(element) {
-		this.element = element;
-		this.sections = this.element.getElementsByClassName('cd-faq__group');
-		this.triggers = this.element.getElementsByClassName('cd-faq__trigger');
-		this.faqContainer = this.element.getElementsByClassName('cd-faq__items')[0];
-		this.faqsCategoriesContainer = this.element.getElementsByClassName('cd-faq__categories')[0];
-		this.faqsCategories = this.faqsCategoriesContainer.getElementsByClassName('cd-faq__category');
-  	this.faqOverlay = this.element.getElementsByClassName('cd-faq__overlay')[0];
-  	this.faqClose = this.element.getElementsByClassName('cd-faq__close-panel')[0];
-  	this.scrolling = false;
-  	initFaqEvents(this);
-  };
+/*
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+*/
 
-  function initFaqEvents(faqs) {
-  	// click on a faq category
-		faqs.faqsCategoriesContainer.addEventListener('click', function(event){
-			var category = event.target.closest('.cd-faq__category');
-			if(!category) return;
-			var mq = getMq(faqs),
-				selectedCategory = category.getAttribute('href').replace('#', '');
-			if(mq == 'mobile') { // on mobile, open faq panel
-				event.preventDefault();
-				faqs.faqContainer.scrollTop = 0;
-				Util.addClass(faqs.faqContainer, 'cd-faq__items--slide-in');
-				Util.addClass(faqs.faqClose, 'cd-faq__close-panel--move-left');
-				Util.addClass(faqs.faqOverlay, 'cd-faq__overlay--is-visible');
-				var selectedSection = faqs.faqContainer.getElementsByClassName('cd-faq__group--selected');
-				if(selectedSection.length > 0) {
-					Util.removeClass(selectedSection[0], 'cd-faq__group--selected');
-				}
-				Util.addClass(document.getElementById(selectedCategory), 'cd-faq__group--selected');
-			} else { // on desktop, scroll to section
-				if(!window.requestAnimationFrame) return;
-				event.preventDefault();
-				var windowScrollTop = window.scrollY || document.documentElement.scrollTop;
-				Util.scrollTo(document.getElementById(selectedCategory).getBoundingClientRect().top + windowScrollTop + 2, 200);
-			}
+(function($) {
+
+	var	$window = $(window),
+		$body = $('body');
+
+	// Breakpoints.
+		breakpoints({
+			xlarge:   [ '1281px',  '1680px' ],
+			large:    [ '981px',   '1280px' ],
+			medium:   [ '737px',   '980px'  ],
+			small:    [ '481px',   '736px'  ],
+			xsmall:   [ '361px',   '480px'  ],
+			xxsmall:  [ null,      '360px'  ]
 		});
 
-		// on mobile -> close faq panel
-		faqs.faqOverlay.addEventListener('click', function(event){
-			closeFaqPanel(faqs);
-		});
-		faqs.faqClose.addEventListener('click', function(event){
-			event.preventDefault();
-			closeFaqPanel(faqs);
+	// Play initial animations on page load.
+		$window.on('load', function() {
+			window.setTimeout(function() {
+				$body.removeClass('is-preload');
+			}, 100);
 		});
 
-		// on desktop -> toggle faq content visibility when clicking on the trigger element
-		faqs.faqContainer.addEventListener('click', function(event){
-			if(getMq(faqs) != 'desktop') return;
-			var trigger = event.target.closest('.cd-faq__trigger');
-			if(!trigger) return;
-			event.preventDefault();
-			var content = trigger.nextElementSibling,
-				parent = trigger.closest('li'),
-				bool = Util.hasClass(parent, 'cd-faq__item-visible');
+	// Touch?
+		if (browser.mobile)
+			$body.addClass('is-touch');
 
-			Util.toggleClass(parent, 'cd-faq__item-visible', !bool);
+	// Forms.
+		var $form = $('form');
 
-			//store initial and final height - animate faq content height
-			Util.addClass(content, 'cd-faq__content--visible');
-			var initHeight = bool ? content.offsetHeight: 0,
-				finalHeight = bool ? 0 : content.offsetHeight;
-			
-			if(window.requestAnimationFrame) {
-				Util.setHeight(initHeight, finalHeight, content, 200, function(){
-					heighAnimationCb(content, bool);
-				});
-			} else {
-				heighAnimationCb(content, bool);
-			}
-		});
-		
-		if(window.requestAnimationFrame) {
-			// on scroll -> update selected category
-			window.addEventListener('scroll', function(){
-				if(getMq(faqs) != 'desktop' || faqs.scrolling) return;
-				faqs.scrolling = true;
-				window.requestAnimationFrame(updateCategory.bind(faqs)); 
+		// Auto-resizing textareas.
+			$form.find('textarea').each(function() {
+
+				var $this = $(this),
+					$wrapper = $('<div class="textarea-wrapper"></div>'),
+					$submits = $this.find('input[type="submit"]');
+
+				$this
+					.wrap($wrapper)
+					.attr('rows', 1)
+					.css('overflow', 'hidden')
+					.css('resize', 'none')
+					.on('keydown', function(event) {
+
+						if (event.keyCode == 13
+						&&	event.ctrlKey) {
+
+							event.preventDefault();
+							event.stopPropagation();
+
+							$(this).blur();
+
+						}
+
+					})
+					.on('blur focus', function() {
+						$this.val($.trim($this.val()));
+					})
+					.on('input blur focus --init', function() {
+
+						$wrapper
+							.css('height', $this.height());
+
+						$this
+							.css('height', 'auto')
+							.css('height', $this.prop('scrollHeight') + 'px');
+
+					})
+					.on('keyup', function(event) {
+
+						if (event.keyCode == 9)
+							$this
+								.select();
+
+					})
+					.triggerHandler('--init');
+
+				// Fix.
+					if (browser.name == 'ie'
+					||	browser.mobile)
+						$this
+							.css('max-height', '10em')
+							.css('overflow-y', 'auto');
+
 			});
-		}
-  };
 
-  function closeFaqPanel(faqs) {
-  	Util.removeClass(faqs.faqContainer, 'cd-faq__items--slide-in');
-  	Util.removeClass(faqs.faqClose, 'cd-faq__close-panel--move-left');
-  	Util.removeClass(faqs.faqOverlay, 'cd-faq__overlay--is-visible');
-  };
+	// Menu.
+		var $menu = $('#menu');
 
-  function getMq(faqs) {
-		//get MQ value ('desktop' or 'mobile') 
-		return window.getComputedStyle(faqs.element, '::before').getPropertyValue('content').replace(/'|"/g, "");
-  };
+		$menu.wrapInner('<div class="inner"></div>');
 
-  function updateCategory() { // update selected category -> show green rectangle to the left of the category
-  	var selected = false;
-		for(var i = 0; i < this.sections.length; i++) {
-			var top = this.sections[i].getBoundingClientRect().top,
-				bool = (top <= 0) && (-1*top < this.sections[i].offsetHeight);
-			Util.toggleClass(this.faqsCategories[i], 'cd-faq__category-selected', bool);
-			if(bool) selected = true;
-		}
-		if(!selected) Util.addClass(this.faqsCategories[0], 'cd-faq__category-selected');
-		this.scrolling = false;
-  };
+		$menu._locked = false;
 
-  function heighAnimationCb(content, bool) {
-		content.removeAttribute("style");
-		if(bool) Util.removeClass(content, 'cd-faq__content--visible');
-  };
+		$menu._lock = function() {
 
-  var faqTemplate = document.getElementsByClassName('js-cd-faq'),
-  	faqArray = [];
-  if(faqTemplate.length > 0) {
-		for(var i = 0; i < faqTemplate.length; i++) {
-			faqArray.push(new FaqTemplate(faqTemplate[i])); 
-		}
-  };
-})();
+			if ($menu._locked)
+				return false;
+
+			$menu._locked = true;
+
+			window.setTimeout(function() {
+				$menu._locked = false;
+			}, 350);
+
+			return true;
+
+		};
+
+		$menu._show = function() {
+
+			if ($menu._lock())
+				$body.addClass('is-menu-visible');
+
+		};
+
+		$menu._hide = function() {
+
+			if ($menu._lock())
+				$body.removeClass('is-menu-visible');
+
+		};
+
+		$menu._toggle = function() {
+
+			if ($menu._lock())
+				$body.toggleClass('is-menu-visible');
+
+		};
+
+		$menu
+			.appendTo($body)
+			.on('click', function(event) {
+				event.stopPropagation();
+			})
+			.on('click', 'a', function(event) {
+
+				var href = $(this).attr('href');
+
+				event.preventDefault();
+				event.stopPropagation();
+
+				// Hide.
+					$menu._hide();
+
+				// Redirect.
+					if (href == '#menu')
+						return;
+
+					window.setTimeout(function() {
+						window.location.href = href;
+					}, 350);
+
+			})
+			.append('<a class="close" href="#menu">Close</a>');
+
+		$body
+			.on('click', 'a[href="#menu"]', function(event) {
+
+				event.stopPropagation();
+				event.preventDefault();
+
+				// Toggle.
+					$menu._toggle();
+
+			})
+			.on('click', function(event) {
+
+				// Hide.
+					$menu._hide();
+
+			})
+			.on('keydown', function(event) {
+
+				// Hide on escape.
+					if (event.keyCode == 27)
+						$menu._hide();
+
+			});
+
+})(jQuery);
